@@ -5,6 +5,8 @@ apply plugin: 'com.bmuschko.tomcat'
 
 version = '0.1-SNAPSHOT'
 
+war.archiveName = "address_book-${version}"
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -53,7 +55,7 @@ dependencies {
     compile "org.springframework:spring-tx:${springVersion}"
     compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"
     compile "org.hibernate:hibernate-validator:${hibernateValidatorVersion}"
-    compile 'org.springframework.data:spring-data-jpa:1.7.0.RELEASE'
+    compile "org.springframework.data:spring-data-jpa:${springDataVersion}"
     compile 'cglib:cglib-nodep:2.2.2'
 
     runtime "com.h2database:h2:${h2DatabaseDriverVersion}"
