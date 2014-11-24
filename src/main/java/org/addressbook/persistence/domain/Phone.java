@@ -1,6 +1,8 @@
 package org.addressbook.persistence.domain;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author alisiikh.
@@ -8,7 +10,17 @@ import javax.persistence.Entity;
 @Entity
 public class Phone extends AbstractPersistentObject {
 
+    @NotNull
+    @Max(value = 12)
     private String phoneNumber;
+
+    public Phone() {
+
+    }
+
+    public Phone(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
