@@ -69,6 +69,9 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:${jacksonVersion}"
 
+    testCompile "org.springframework:spring-test:${springVersion}"
+    testCompile "org.junit:junit:4.11"
+
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 }
 
