@@ -18,7 +18,7 @@ import java.sql.Statement;
 @ContextConfiguration(classes = {DataSourceConfig.class})
 @TransactionConfiguration(defaultRollback = true)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class DataSourceIntegrationTests {
+public class DataSourceUnitTests {
 
     @Inject
     private DataSource dataSource;

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" th:text="#{project.name}"></title>
+    <link rel='stylesheet' th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.min.css}"/>
+    <link rel='stylesheet' th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/flags.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation"  th:include="fragments/main :: menu"></nav>
+    <div class="col-xs-12" layout:fragment="content"></div>
+</div>
+</body>
+</html>

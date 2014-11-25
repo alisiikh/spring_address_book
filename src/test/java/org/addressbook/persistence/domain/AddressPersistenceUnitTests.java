@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  */
 @ContextConfiguration(classes = ApplicationConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AddressPersistenceIntegrationTests {
+public class AddressPersistenceUnitTests {
 
     @Inject
     private EntityManagerFactory emf;
@@ -26,9 +26,26 @@ public class AddressPersistenceIntegrationTests {
     public void testAddressAndPhonesRelationship() {
         EntityManager em = emf.createEntityManager();
 
-        Address address = new Address();
+        PhysicalAddress address = new PhysicalAddress();
         address.addToPhones(new Phone("+38(063)000-00-00"));
         address.addToPhones(new Phone("+38(063)123-45-67"));
+
+        Country ukraine = new Country(804, "UKR", "UKRAINE");
+
+        City dnipro = new City("DNIPROPETROVSK");
+        City kyiv = new City("KYIV");
+        City lviv = new City("LVIV");
+
+        ukraine.addToCities(dnipro);
+        ukraine.addToCities(lviv);
+        ukraine.addToCities(kyiv);
+        em.persist(ukraine);
+
+        address.setCountry(ukraine);
+        address.setCompanyName("NAFTOGAZ");
+        address.setCity(kyiv);
+        address.setEmail("naftogaz@ukr.net");
+        address.setPostalCode("00000");
 
         em.persist(address);
 

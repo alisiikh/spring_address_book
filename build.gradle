@@ -67,6 +67,9 @@ dependencies {
     compile "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:${thymeleafDialectVersion}"
     compile "net.sourceforge.nekohtml:nekohtml:1.9.21"
 
+    compile 'org.webjars:jquery:2.1.1'
+    compile 'org.webjars:bootstrap:3.3.1'
+
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:${jacksonVersion}"

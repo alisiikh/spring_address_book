@@ -1,0 +1,18 @@
+<nav th:fragment="menu">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}" th:text="#{project.name}"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" collapse="navbarCollapsed">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="text-center">
+                    <span class="navbar-text">
+                        <a th:href="@{__${#httpServletRequest.requestURI}__(lang=en)}"><img th:src="@{/img/1px.png}" class="flag flag-gb"/></a>
+                        <a th:href="@{__${#httpServletRequest.requestURI}__(lang=uk)}"><img th:src="@{/img/1px.png}" class="flag flag-ua"/></a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
