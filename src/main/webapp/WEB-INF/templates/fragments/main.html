@@ -4,7 +4,11 @@
             <a class="navbar-brand" th:href="@{/}" th:text="#{project.name}"></a>
         </div>
 
-        <div class="collapse navbar-collapse" collapse="navbarCollapsed">
+        <div class="collapse navbar-collapse" data-collapse="navbarCollapsed">
+            <ul class="nav navbar-nav">
+                <li><a th:text="#{address.list.title}" th:href="@{/address/list}">Addresses</a></li>
+            </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li class="text-center">
                     <span class="navbar-text">

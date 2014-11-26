@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title th:text="#{address.list.title}"></title>
+</head>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="pull-right">
+            <a class="btn btn-primary" th:href="@{/address/create}" th:text="#{button.create}">Create New</a>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Company name</th>
+            <th>Email</th>
+            <th>Postal Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="address : ${addresses}">
+            <td>
+                <a th:href="@{/address/edit/} + ${address.id}" th:text="${address.id}">1</a>
+            </td>
+            <td th:text="${address.companyName}">Fake Company</td>
+            <td th:text="${address.email}">fakeemail@google.com</td>
+            <td th:text="${address.postalCode}">000-000</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>
+

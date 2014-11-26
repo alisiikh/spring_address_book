@@ -1,0 +1,26 @@
+<div class="row">
+
+    <input type="hidden" name="id" th:value="${address.id}"/>
+
+    <div class="col-md-6 form-group">
+        <label th:text="#{address.companyName}">Company Name</label>
+        <input type="text" name="companyName" class="form-control" th:value="${address.companyName}" th:disabled="${readOnly}"/>
+    </div>
+
+    <div class="col-md-6 form-group">
+        <label th:text="#{address.email}">Email</label>
+        <input type="text" th:name="email" class="form-control" th:value="${address.email}"
+               maxlength="255" th:disabled="${readOnly}"/>
+    </div>
+
+    <div class="col-md-6 form-group">
+        <label th:text="#{address.postalCode}">Postal Code</label>
+        <input type="text" th:name="postalCode" class="form-control" th:value="${address.postalCode}" th:disabled="${readOnly}"/>
+    </div>
+
+    <div class="pull-right">
+        <a class="btn btn-primary" th:href="@{/address/list}" th:text="#{button.cancel}">Cancel</a>
+        <input type="submit" class="btn btn-primary" th:value="#{button.save}"/>
+    </div>
+</div>
+

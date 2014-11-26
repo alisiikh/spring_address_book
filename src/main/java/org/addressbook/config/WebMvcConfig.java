@@ -60,7 +60,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/templates/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
-        resolver.setCacheable(false);
+        resolver.setCacheable(true);
         resolver.setOrder(1);
         return resolver;
     }
