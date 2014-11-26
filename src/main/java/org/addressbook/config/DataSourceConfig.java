@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.*;
@@ -20,7 +21,8 @@ import java.util.Properties;
  */
 @Configuration
 @EnableJpaRepositories(basePackages = "org.addressbook.persistence.dao")
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
+@EnableJpaAuditing(setDates = true)
 @PropertySource(value = "classpath:hibernate.properties")
 public class DataSourceConfig {
 

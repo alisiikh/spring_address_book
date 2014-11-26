@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  */
 @ContextConfiguration(classes = ApplicationConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AddressPersistenceUnitTests {
+public class AddressPersistenceIntegrationTests {
 
     @Inject
     private EntityManagerFactory emf;

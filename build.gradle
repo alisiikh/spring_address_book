@@ -7,8 +7,10 @@ version = '0.1-SNAPSHOT'
 
 war.archiveName = "address_book-${version}"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
 
 ext {
     springVersion = '4.1.1.RELEASE'
@@ -28,7 +30,6 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
-        maven { url 'http://repo.spring.io/plugins-release' }
     }
 
     dependencies {
@@ -38,6 +39,7 @@ buildscript {
 
 repositories {
     mavenCentral()
+    maven { url 'http://repo.spring.io/plugins-release' }
 }
 
 dependencies {
@@ -53,6 +55,7 @@ dependencies {
 
     compile "org.springframework:spring-webmvc:${springVersion}"
     compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-aspects:${springVersion}"
     compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"
     compile "org.hibernate:hibernate-validator:${hibernateValidatorVersion}"
     compile "org.springframework.data:spring-data-jpa:${springDataVersion}"

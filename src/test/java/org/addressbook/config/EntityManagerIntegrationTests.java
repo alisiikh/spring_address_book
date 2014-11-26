@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(classes = {DataSourceConfig.class})
 @TransactionConfiguration(defaultRollback = true)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class EntityManagerUnitTests {
+public class EntityManagerIntegrationTests {
 
     @Inject
     private EntityManagerFactory entityManagerFactory;
