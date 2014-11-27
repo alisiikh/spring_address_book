@@ -4,14 +4,18 @@ import org.addressbook.persistence.domain.PhysicalAddress;
 import org.addressbook.service.PhysicalAddressService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 /**
  * @author alisiikh.
  */
 @Controller
+@SessionAttributes(types = PhysicalAddress.class)
 @RequestMapping("/address")
 public class PhysicalAddressController {
 
@@ -48,28 +52,24 @@ public class PhysicalAddressController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute PhysicalAddress physicalAddress, Model model) {
-        try {
-            physicalAddressService.save(physicalAddress);
-        } catch (Exception e) {
-            model.addAttribute("address", physicalAddress);
-
+    public String save(@ModelAttribute("address") @Valid PhysicalAddress physicalAddress, BindingResult bindingResult, SessionStatus sessionStatus) {
+        if (bindingResult.hasErrors()) {
             return "/address/create";
+        } else {
+            physicalAddressService.save(physicalAddress);
+            sessionStatus.setComplete();
+            return "redirect:/address/view/" + physicalAddress.getId();
         }
-
-        return "redirect:/address/view/" + physicalAddress.getId();
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute PhysicalAddress physicalAddress, Model model) {
-        try {
-            physicalAddressService.save(physicalAddress);
-        } catch (Exception e) {
-            model.addAttribute("address", physicalAddress);
-
+    public String update(@ModelAttribute("address") @Valid PhysicalAddress physicalAddress, BindingResult bindingResult, SessionStatus sessionStatus) {
+        if (bindingResult.hasErrors()) {
             return "/address/edit";
+        } else {
+            physicalAddressService.save(physicalAddress);
+            sessionStatus.setComplete();
+            return "redirect:/address/view/" + physicalAddress.getId();
         }
-
-        return "redirect:/address/view/" + physicalAddress.getId();
     }
 }
