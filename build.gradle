@@ -5,7 +5,7 @@ apply plugin: 'com.bmuschko.tomcat'
 
 version = '0.1-SNAPSHOT'
 
-war.archiveName = "address_book-${version}"
+war.archiveName = "address_book-${version}.war"
 
 compileJava {
     sourceCompatibility = 1.8

@@ -7,7 +7,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
  * @author alisiikh
  */
 @Configuration
-@ComponentScan({"org.addressbook.service"})
+@ComponentScan({"org.addressbook.service", "org.addressbook.bootstrap"})
 @Import({DataSourceConfig.class})
 public class ApplicationConfig {
 

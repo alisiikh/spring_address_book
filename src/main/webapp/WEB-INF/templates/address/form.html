@@ -1,21 +1,67 @@
 <div class="row">
-
     <input type="hidden" name="id" th:value="${address.id}"/>
 
-    <div class="col-md-6 form-group">
-        <label th:text="#{address.companyName}">Company Name</label>
-        <input type="text" name="companyName" class="form-control" th:value="${address.companyName}" th:disabled="${readOnly}"/>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label th:text="#{address.companyName}">Company Name</label>
+            <input type="text" name="companyName" class="form-control" th:value="${address.companyName}"
+                   th:disabled="${readOnly}"/>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label th:text="#{address.email}">Email</label>
+            <input type="text" th:name="email" class="form-control" th:value="${address.email}"
+                   maxlength="255" th:disabled="${readOnly}"/>
+        </div>
     </div>
 
-    <div class="col-md-6 form-group">
-        <label th:text="#{address.email}">Email</label>
-        <input type="text" th:name="email" class="form-control" th:value="${address.email}"
-               maxlength="255" th:disabled="${readOnly}"/>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label th:text="#{address.postalCode}">Postal Code</label>
+            <input type="text" th:name="postalCode" class="form-control" th:value="${address.postalCode}"
+                   th:disabled="${readOnly}"/>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label th:text="#{address.country}">Country</label>
+            <select class="form-control" th:disabled="${readOnly}">
+                <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
+            </select>
+        </div>
     </div>
 
-    <div class="col-md-6 form-group">
-        <label th:text="#{address.postalCode}">Postal Code</label>
-        <input type="text" th:name="postalCode" class="form-control" th:value="${address.postalCode}" th:disabled="${readOnly}"/>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <button type="button" class="btn btn-default" data-duplicate-add="phone" th:disabled="${readOnly}"
+                    th:text="#{address.addPhoneNumber.button}">Add phone number
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div data-duplicate="phone" th:each="phone : ${address.phones}">
+            <div class="col-md-6 form-group">
+                <div class="input-group">
+                    <input type="text" name="phone[]" class="form-control" th:disabled="${readOnly}"
+                           th:placeholder="#{address.phoneNumber}" th:value="${phone.phoneNumber}"/>
+                    <span class="input-group-btn">
+                         <button type="button" class="btn btn-default" data-duplicate-remove="phone">-</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div data-duplicate="phone" th:if="${!readOnly}">
+            <div class="col-md-6 form-group">
+                <div class="input-group">
+                    <input type="text" name="phone[]" class="form-control"
+                           th:placeholder="#{address.phoneNumber}"/>
+                    <span class="input-group-btn">
+                         <button type="button" class="btn btn-default" data-duplicate-remove="phone">-</button>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="pull-right">
@@ -23,4 +69,13 @@
         <input type="submit" class="btn btn-primary" th:value="#{button.save}"/>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        $('input[name="phone[]"]').mask('+00(000) 000-00-00', {
+            placeholder: '+__(___) ___-__-__',
+            clearIfNotMatch: true
+        })
+    });
+</script>
 

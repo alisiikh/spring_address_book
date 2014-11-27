@@ -11,11 +11,9 @@ import javax.validation.constraints.NotNull;
 public class Phone extends AbstractPersistentObject {
 
     @NotNull
-    @Max(value = 12)
     private String phoneNumber;
 
     public Phone() {
-
     }
 
     public Phone(String phoneNumber) {
