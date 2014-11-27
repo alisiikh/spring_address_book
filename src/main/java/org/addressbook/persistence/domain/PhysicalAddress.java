@@ -20,7 +20,7 @@ public class PhysicalAddress extends AbstractPersistentObject {
     @ManyToOne
     private City city;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "address_phone",
             joinColumns = {@JoinColumn(name = "address_id")},
             inverseJoinColumns = {@JoinColumn(name = "phone_id")})

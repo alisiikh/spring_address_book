@@ -16,7 +16,7 @@ public class Country extends AbstractPersistentObject {
     private String iso3;
     private String name;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn
     private Set<City> cities = new HashSet<>();
 
