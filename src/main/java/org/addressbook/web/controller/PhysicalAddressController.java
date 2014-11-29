@@ -2,7 +2,6 @@ package org.addressbook.web.controller;
 
 import org.addressbook.persistence.dao.CountryRepository;
 import org.addressbook.persistence.domain.Country;
-import org.addressbook.persistence.domain.Phone;
 import org.addressbook.persistence.domain.PhysicalAddress;
 import org.addressbook.service.PhysicalAddressService;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -66,15 +66,12 @@ public class PhysicalAddressController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("address") @Valid PhysicalAddress physicalAddress, BindingResult bindingResult,
-                       @RequestParam(value = "phone[]") Set<String> phones,
+                       @RequestParam(value = "phoneNumber[]") Set<String> phones,
                        SessionStatus sessionStatus) {
         if (bindingResult.hasErrors()) {
             return "/address/create";
         } else {
-            for (String phoneNumber : phones) {
-                physicalAddress.addToPhones(new Phone(phoneNumber));
-            }
-            physicalAddressService.save(physicalAddress);
+            physicalAddressService.savePhoneNumbers(physicalAddress, phones);
             sessionStatus.setComplete();
             return "redirect:/address/view/" + physicalAddress.getId();
         }
@@ -82,15 +79,12 @@ public class PhysicalAddressController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@ModelAttribute("address") @Valid PhysicalAddress physicalAddress, BindingResult bindingResult,
-                         @RequestParam(value = "phone[]") Set<String> phones,
+                         @RequestParam(value = "phoneNumber[]") Set<String> phones,
                          SessionStatus sessionStatus) {
         if (bindingResult.hasErrors()) {
             return "/address/edit";
         } else {
-            for (String phoneNumber : phones) {
-                physicalAddress.addToPhones(new Phone(phoneNumber));
-            }
-            physicalAddressService.save(physicalAddress);
+            physicalAddressService.savePhoneNumbers(physicalAddress, phones);
             sessionStatus.setComplete();
             return "redirect:/address/view/" + physicalAddress.getId();
         }

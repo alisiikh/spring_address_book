@@ -1,6 +1,7 @@
 package org.addressbook.service;
 
 import org.addressbook.config.ApplicationConfig;
+import org.addressbook.persistence.domain.Phone;
 import org.addressbook.persistence.domain.PhysicalAddress;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.inject.Inject;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.junit.Assert.assertTrue;
 
@@ -70,5 +74,21 @@ public class PhysicalAddressServiceIntegrationTests {
         PhysicalAddress p = physicalAddressService.get(oldId);
 
         assertTrue("Address instance should be removed", p == null);
+    }
+
+    @Test
+    public void testSavePhoneNumbers() {
+        PhysicalAddress physicalAddress = physicalAddressService.create();
+        physicalAddress.setEmail("fakeemail@google.com");
+
+        physicalAddressService.savePhoneNumbers(physicalAddress, new HashSet<>(
+                Arrays.asList("+38(050) 000-00-00", "+38(063) 000-00-00", "+38(093) 000-00-00")
+        ));
+
+        assertTrue("Three phone numbers got persisted", physicalAddress.getPhones().size() == 3);
+
+        physicalAddressService.savePhoneNumbers(physicalAddress, new HashSet<>(Arrays.asList("+38(093) 000-00-00")));
+
+        assertTrue("Two phone numbers should be remove, one remains", physicalAddress.getPhones().size() == 1);
     }
 }

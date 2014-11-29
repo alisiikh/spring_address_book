@@ -39,11 +39,11 @@
     </div>
 
     <div class="row">
-        <div data-duplicate="phone" th:each="phone : ${address.phones}">
+        <div data-duplicate="phone" class="phone-number-tmpl" th:each="phone : ${address.phones}">
             <div class="col-md-6 form-group">
                 <div class="input-group">
-                    <input type="text" name="phone[]" class="form-control" th:disabled="${readOnly}"
-                           th:placeholder="#{address.phoneNumber}" th:value="${phone.phoneNumber}"/>
+                    <input type="text" name="phoneNumber[]" class="form-control" th:disabled="${readOnly}"
+                           th:value="${phone.phoneNumber}"/>
                     <span class="input-group-btn">
                          <button type="button" class="btn btn-default" data-duplicate-remove="phone">-</button>
                     </span>
@@ -51,11 +51,10 @@
             </div>
         </div>
 
-        <div data-duplicate="phone" th:if="${!readOnly}">
+        <div data-duplicate="phone" class="phone-number-tmpl" th:if="${!readOnly}">
             <div class="col-md-6 form-group">
                 <div class="input-group">
-                    <input type="text" name="phone[]" class="form-control"
-                           th:placeholder="#{address.phoneNumber}"/>
+                    <input type="text" name="phoneNumber[]" class="form-control"/>
                     <span class="input-group-btn">
                          <button type="button" class="btn btn-default" data-duplicate-remove="phone">-</button>
                     </span>
@@ -64,18 +63,17 @@
         </div>
     </div>
 
-    <div class="pull-right">
-        <a class="btn btn-primary" th:href="@{/address/list}" th:text="#{button.cancel}">Cancel</a>
-        <input type="submit" class="btn btn-primary" th:value="#{button.save}"/>
-    </div>
+
 </div>
 
 <script type="text/javascript">
-    $(function() {
-        $('input[name="phone[]"]').mask('+00(000) 000-00-00', {
-            placeholder: '+__(___) ___-__-__',
-            clearIfNotMatch: true
-        })
+    $(function () {
+        $('#addressForm').livequery('.phone-number-tmpl', function (element) {
+            $(element).find('input[name="phoneNumber[]"]').mask('+00(000) 000-00-00', {
+                placeholder: '+__(___) ___-__-__',
+                clearIfNotMatch: true
+            });
+        });
     });
 </script>
 

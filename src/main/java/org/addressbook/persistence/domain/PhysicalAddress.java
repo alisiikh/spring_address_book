@@ -42,6 +42,17 @@ public class PhysicalAddress extends AbstractPersistentObject {
         phones.remove(phone);
     }
 
+    public void addToPhones(String phoneNumber) {
+        phones.add(new Phone(phoneNumber));
+    }
+
+    public void removeFromPhones(String phoneNumber) {
+        phones.stream()
+                .filter(p -> p.getPhoneNumber().equals(phoneNumber))
+                .findFirst()
+                .ifPresent(phones::remove);
+    }
+
     public String getEmail() {
         return email;
     }

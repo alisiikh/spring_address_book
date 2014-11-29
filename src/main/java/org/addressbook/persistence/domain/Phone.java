@@ -1,7 +1,6 @@
 package org.addressbook.persistence.domain;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 /**

@@ -11,6 +11,11 @@
 <div layout:fragment="content">
     <form id="addressForm" role="form" th:action="@{/address/update}" method="post">
         <div th:include="address/form" th:with="readOnly=${false}"></div>
+
+        <div class="pull-right">
+            <a class="btn btn-primary" th:href="@{/address/list}" th:text="#{button.cancel}">Cancel</a>
+            <input type="submit" class="btn btn-primary" th:value="#{button.save}"/>
+        </div>
     </form>
 </div>
 </html>
