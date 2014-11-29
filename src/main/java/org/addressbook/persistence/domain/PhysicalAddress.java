@@ -10,8 +10,12 @@ import java.util.Set;
 @Entity
 public class PhysicalAddress extends AbstractPersistentObject {
 
-    private String email;
-    private String companyName;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "address_person")
+    private Person person = new Person();
+    private String street1;
+    private String street2;
+
     private String postalCode;
 
     @ManyToOne
@@ -53,20 +57,28 @@ public class PhysicalAddress extends AbstractPersistentObject {
                 .ifPresent(phones::remove);
     }
 
-    public String getEmail() {
-        return email;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getStreet1() {
+        return street1;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setStreet1(String street1) {
+        this.street1 = street1;
+    }
+
+    public String getStreet2() {
+        return street2;
+    }
+
+    public void setStreet2(String street2) {
+        this.street2 = street2;
     }
 
     public String getPostalCode() {
@@ -101,32 +113,37 @@ public class PhysicalAddress extends AbstractPersistentObject {
         PhysicalAddress that = (PhysicalAddress) o;
 
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
-        if (companyName != null ? !companyName.equals(that.companyName) : that.companyName != null) return false;
         if (country != null ? !country.equals(that.country) : that.country != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (person != null ? !person.equals(that.person) : that.person != null) return false;
+        if (phones != null ? !phones.equals(that.phones) : that.phones != null) return false;
         if (postalCode != null ? !postalCode.equals(that.postalCode) : that.postalCode != null) return false;
+        if (street1 != null ? !street1.equals(that.street1) : that.street1 != null) return false;
+        if (street2 != null ? !street2.equals(that.street2) : that.street2 != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = email != null ? email.hashCode() : 0;
-        result = 31 * result + (companyName != null ? companyName.hashCode() : 0);
+        int result = person != null ? person.hashCode() : 0;
+        result = 31 * result + (street1 != null ? street1.hashCode() : 0);
+        result = 31 * result + (street2 != null ? street2.hashCode() : 0);
         result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
         result = 31 * result + (country != null ? country.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (phones != null ? phones.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "PhysicalAddress{" +
-                "email='" + email + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", postalCode='" + postalCode + '\'' +
+                "city=" + city +
                 ", country=" + country +
-                ", city=" + city +
+                ", postalCode='" + postalCode + '\'' +
+                ", street2='" + street2 + '\'' +
+                ", street1='" + street1 + '\'' +
+                ", person=" + person +
                 '}';
     }
 }

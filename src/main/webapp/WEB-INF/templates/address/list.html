@@ -19,19 +19,25 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>Company name</th>
-            <th>Email</th>
-            <th>Postal Code</th>
+            <th th:text="#{person.fullName}">Full Name</th>
+            <th th:text="#{person.email}">Email</th>
+            <th th:text="#{address.street1}">Street1</th>
+            <th th:text="#{address.street2}">Street2</th>
+            <th th:text="#{person.companyName}">Company Name</th>
+            <th th:text="#{address.postalCode}">Postal Code</th>
+            <th th:text="#{country.name}">Country Name</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="address : ${addresses}">
-            <td>
-                <a th:href="@{/address/edit/} + ${address.id}" th:text="${address.id}">1</a>
-            </td>
-            <td th:text="${address.companyName}">Fake Company</td>
-            <td th:text="${address.email}">fakeemail@google.com</td>
+            <td><a th:href="@{/address/edit/} + ${address.id}" th:text="${address.id}">1</a></td>
+            <td th:text="${address.person.fullName}">Full Name</td>
+            <td th:text="${address.person.email}">fakeemail@google.com</td>
+            <td th:text="${address.street1}">Street1</td>
+            <td th:text="${address.street2}">Street2</td>
+            <td th:text="${address.person.companyName}">Fake Company</td>
             <td th:text="${address.postalCode}">000-000</td>
+            <td th:text="${address.country != null ? address.country.name : ''}">Fake country</td>
         </tr>
         </tbody>
     </table>

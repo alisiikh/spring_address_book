@@ -9,7 +9,7 @@
 </head>
 
 <div layout:fragment="content">
-    <form id="addressForm" role="form" th:action="@{/address/save}" method="post">
+    <form id="addressForm" role="form" th:action="@{/address/save}" th:object="${address}" method="post">
         <div th:include="address/form" th:with="readOnly=${false}"></div>
 
         <div class="pull-right">

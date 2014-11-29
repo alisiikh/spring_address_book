@@ -4,15 +4,18 @@ import org.addressbook.persistence.dao.CountryRepository;
 import org.addressbook.persistence.domain.Country;
 import org.addressbook.persistence.domain.PhysicalAddress;
 import org.addressbook.service.PhysicalAddressService;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +26,9 @@ import java.util.Set;
 @SessionAttributes(types = PhysicalAddress.class)
 @RequestMapping("/address")
 public class PhysicalAddressController {
+
+    @Inject
+    private MessageSource messageSource;
 
     @Inject
     private PhysicalAddressService physicalAddressService;
@@ -44,6 +50,10 @@ public class PhysicalAddressController {
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String view(@PathVariable("id") PhysicalAddress physicalAddress, Model model) {
+        if (physicalAddress == null) {
+            return "redirect:/address/list";
+        }
+
         model.addAttribute("address", physicalAddress);
 
         return "/address/view";
@@ -51,6 +61,9 @@ public class PhysicalAddressController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") PhysicalAddress physicalAddress, Model model) {
+        if (physicalAddress == null) {
+            return "redirect:/address/list";
+        }
         model.addAttribute("address", physicalAddress);
 
         return "/address/edit";
@@ -88,5 +101,22 @@ public class PhysicalAddressController {
             sessionStatus.setComplete();
             return "redirect:/address/view/" + physicalAddress.getId();
         }
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") PhysicalAddress physicalAddress, RedirectAttributes redirectAttributes) {
+        if (physicalAddress == null) {
+            return "redirect:/address/list";
+        }
+
+        try {
+            physicalAddressService.delete(physicalAddress);
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("error", messageSource.getMessage("delete.error",
+                    new Object[]{ "Address", physicalAddress.getId() }, LocaleContextHolder.getLocale()));
+            return "redirect:/address/view/{id}";
+        }
+
+        return "redirect:/address/list";
     }
 }

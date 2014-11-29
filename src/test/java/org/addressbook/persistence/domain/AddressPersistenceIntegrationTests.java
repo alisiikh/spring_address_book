@@ -1,6 +1,6 @@
 package org.addressbook.persistence.domain;
 
-import org.addressbook.config.ApplicationConfig;
+import org.addressbook.config.DataSourceConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author alisiikh.
  */
-@ContextConfiguration(classes = ApplicationConfig.class)
+@ContextConfiguration(classes = DataSourceConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AddressPersistenceIntegrationTests {
 
@@ -42,9 +42,7 @@ public class AddressPersistenceIntegrationTests {
         em.persist(ukraine);
 
         address.setCountry(ukraine);
-        address.setCompanyName("NAFTOGAZ");
         address.setCity(kyiv);
-        address.setEmail("naftogaz@ukr.net");
         address.setPostalCode("00000");
 
         em.persist(address);

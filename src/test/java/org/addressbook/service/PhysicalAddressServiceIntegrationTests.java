@@ -37,8 +37,7 @@ public class PhysicalAddressServiceIntegrationTests {
     public void testSaveNewPhysicalAddress() {
         PhysicalAddress physicalAddress = physicalAddressService.create();
 
-        physicalAddress.setCompanyName("fakecompany");
-        physicalAddress.setEmail("fakeemail@google.com");
+        physicalAddress.setStreet1("Fake street 1");
 
         physicalAddressService.save(physicalAddress);
 
@@ -48,7 +47,7 @@ public class PhysicalAddressServiceIntegrationTests {
     @Test
     public void testUpdatePhysicalAddress() {
         PhysicalAddress physicalAddress = physicalAddressService.create();
-        physicalAddress.setEmail("fakeemail@google.com");
+        physicalAddress.setStreet1("Fake street 1");
         physicalAddressService.save(physicalAddress);
 
         Long oldId = physicalAddress.getId();
@@ -64,7 +63,7 @@ public class PhysicalAddressServiceIntegrationTests {
     @Test
     public void testDeletePhysicalAddress() {
         PhysicalAddress physicalAddress = physicalAddressService.create();
-        physicalAddress.setEmail("fakeEmail@google.com");
+        physicalAddress.setStreet1("Fake street 1");
         physicalAddressService.save(physicalAddress);
 
         Long oldId = physicalAddress.getId();
@@ -79,7 +78,7 @@ public class PhysicalAddressServiceIntegrationTests {
     @Test
     public void testSavePhoneNumbers() {
         PhysicalAddress physicalAddress = physicalAddressService.create();
-        physicalAddress.setEmail("fakeemail@google.com");
+        physicalAddress.setStreet1("Fake street 1");
 
         physicalAddressService.savePhoneNumbers(physicalAddress, new HashSet<>(
                 Arrays.asList("+38(050) 000-00-00", "+38(063) 000-00-00", "+38(093) 000-00-00")

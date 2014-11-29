@@ -1,7 +1,8 @@
 package org.addressbook.persistence.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author alisiikh.
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Phone extends AbstractPersistentObject {
 
-    @NotNull
+    @NotEmpty
     private String phoneNumber;
 
     public Phone() {

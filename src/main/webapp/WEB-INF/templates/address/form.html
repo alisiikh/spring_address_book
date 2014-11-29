@@ -1,30 +1,71 @@
 <div class="row">
-    <input type="hidden" name="id" th:value="${address.id}"/>
+    <input type="hidden" th:field="*{id}" th:value="${address.id}"/>
+
+    <div class="row">
+        <div class="col-md-3 form-group">
+            <label th:text="#{person.gender}">Gender</label>
+
+            <br/>
+
+            <label class="radio-inline" th:each="gender : ${T(org.addressbook.persistence.domain.Gender).values()}">
+                <input type="radio" th:field="*{person.gender}" th:disabled="${readOnly}" th:value="${gender}"/>
+                <span th:text="#{${'gender.' + gender}}"></span>
+            </label>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-6 form-group">
-            <label th:text="#{address.companyName}">Company Name</label>
-            <input type="text" name="companyName" class="form-control" th:value="${address.companyName}"
+            <label th:text="#{person.firstName}">First Name</label>
+            <input type="text" th:field="*{person.firstName}" class="form-control" th:value="*{person.firstName}"
                    th:disabled="${readOnly}"/>
         </div>
 
         <div class="col-md-6 form-group">
-            <label th:text="#{address.email}">Email</label>
-            <input type="text" th:name="email" class="form-control" th:value="${address.email}"
+            <label th:text="#{person.lastName}">Last Name</label>
+            <input type="text" th:field="*{person.lastName}" class="form-control" th:value="*{person.lastName}"
+                   th:disabled="${readOnly}"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label th:text="#{person.companyName}">Company Name</label>
+            <input type="text" th:field="*{person.companyName}" class="form-control" th:value="*{person.companyName}"
+                   th:disabled="${readOnly}"/>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label th:text="#{person.email}">Email</label>
+            <input type="text" th:field="*{person.email}" class="form-control" th:value="*{person.email}"
                    maxlength="255" th:disabled="${readOnly}"/>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6 form-group">
+            <label th:text="#{address.street1}">Postal Code</label>
+            <input type="text" th:field="*{street1}" class="form-control" th:value="*{street1}"
+                   th:disabled="${readOnly}"/>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label th:text="#{address.street2}">Postal Code</label>
+            <input type="text" th:field="*{street2}" class="form-control" th:value="*{street2}"
+                   th:disabled="${readOnly}"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 form-group">
             <label th:text="#{address.postalCode}">Postal Code</label>
-            <input type="text" th:name="postalCode" class="form-control" th:value="${address.postalCode}"
+            <input type="text" th:field="*{postalCode}" class="form-control" th:value="*{postalCode}"
                    th:disabled="${readOnly}"/>
         </div>
 
         <div class="col-md-6 form-group">
             <label th:text="#{address.country}">Country</label>
-            <select class="form-control" th:disabled="${readOnly}">
+            <select class="form-control" th:disabled="${readOnly}" th:field="*{country}">
                 <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
             </select>
         </div>
@@ -62,8 +103,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
 <script type="text/javascript">
