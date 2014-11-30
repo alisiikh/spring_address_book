@@ -2,6 +2,7 @@ package org.addressbook.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
  * @author alisiikh
@@ -19,5 +20,12 @@ public class ApplicationConfig {
         messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setFallbackToSystemLocale(true);
         return messageSource;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean smartValidator() {
+        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+        validatorFactoryBean.setValidationMessageSource(messageSource());
+        return validatorFactoryBean;
     }
 }

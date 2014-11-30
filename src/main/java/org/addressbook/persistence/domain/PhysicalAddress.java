@@ -1,6 +1,10 @@
 package org.addressbook.persistence.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,14 +14,20 @@ import java.util.Set;
 @Entity
 public class PhysicalAddress extends AbstractPersistentObject {
 
+    @NotNull
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "address_person")
     private Person person = new Person();
+    @NotBlank
+    @Size(min = 0, max = 255)
     private String street1;
     private String street2;
 
+    @NotBlank
+    @Size(min = 0, max = 10)
     private String postalCode;
 
+    @NotNull
     @ManyToOne
     private Country country;
 

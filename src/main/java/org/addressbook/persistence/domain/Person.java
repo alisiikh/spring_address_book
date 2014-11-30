@@ -1,15 +1,26 @@
 package org.addressbook.persistence.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author alisiikh.
  */
 @Entity
 public class Person extends AbstractPersistentObject {
+    @Size(min = 0, max = 255)
+    @NotBlank
     private String firstName;
+    @Size(min = 0, max = 255)
+    @NotBlank
     private String lastName;
+    @NotNull
     private Gender gender;
+    @Email
     private String email;
     private String companyName;
 

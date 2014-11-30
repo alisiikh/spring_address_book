@@ -2,7 +2,7 @@
     <input type="hidden" th:field="*{id}" th:value="${address.id}"/>
 
     <div class="row">
-        <div class="col-md-3 form-group">
+        <div th:class="${#fields.hasErrors('person.gender')} ? |col-md-6 form-group has-error| : |col-md-6 form-group|">
             <label th:text="#{person.gender}">Gender</label>
 
             <br/>
@@ -10,21 +10,28 @@
             <label class="radio-inline" th:each="gender : ${T(org.addressbook.persistence.domain.Gender).values()}">
                 <input type="radio" th:field="*{person.gender}" th:disabled="${readOnly}" th:value="${gender}"/>
                 <span th:text="#{${'gender.' + gender}}"></span>
+
             </label>
+
+            <span class="help-block" th:each="err : ${#fields.errors('person.gender')}" th:text="${err}"></span>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-6 form-group">
+        <div th:class="${#fields.hasErrors('person.firstName')} ? |col-md-6 form-group has-error| : |col-md-6 form-group|">
             <label th:text="#{person.firstName}">First Name</label>
             <input type="text" th:field="*{person.firstName}" class="form-control" th:value="*{person.firstName}"
                    th:disabled="${readOnly}"/>
+
+            <span class="help-block" th:each="err : ${#fields.errors('person.firstName')}" th:text="${err}"></span>
         </div>
 
-        <div class="col-md-6 form-group">
+        <div th:class="${#fields.hasErrors('person.lastName')} ? |col-md-6 form-group has-error| : |col-md-6 form-group|">
             <label th:text="#{person.lastName}">Last Name</label>
             <input type="text" th:field="*{person.lastName}" class="form-control" th:value="*{person.lastName}"
                    th:disabled="${readOnly}"/>
+
+            <span class="help-block" th:each="err : ${#fields.errors('person.lastName')}" th:text="${err}"></span>
         </div>
     </div>
 
@@ -35,18 +42,22 @@
                    th:disabled="${readOnly}"/>
         </div>
 
-        <div class="col-md-6 form-group">
+        <div th:class="${#fields.hasErrors('person.email')} ? |col-md-6 form-group has-error| : |col-md-6 form-group|">
             <label th:text="#{person.email}">Email</label>
             <input type="text" th:field="*{person.email}" class="form-control" th:value="*{person.email}"
                    maxlength="255" th:disabled="${readOnly}"/>
+
+            <span class="help-block" th:each="err : ${#fields.errors('person.email')}" th:text="${err}"></span>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-6 form-group">
+        <div th:class="${#fields.hasErrors('street1')} ? |col-md-6 form-group has-error| : |col-md-6 form-group|">
             <label th:text="#{address.street1}">Postal Code</label>
             <input type="text" th:field="*{street1}" class="form-control" th:value="*{street1}"
                    th:disabled="${readOnly}"/>
+
+            <span class="help-block" th:each="err : ${#fields.errors('street1')}" th:text="${err}"></span>
         </div>
 
         <div class="col-md-6 form-group">
@@ -57,10 +68,12 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 form-group">
+        <div th:class="${#fields.hasErrors('postalCode')}? |col-md-6 form-group has-error| : |col-md-6 form-group|">
             <label th:text="#{address.postalCode}">Postal Code</label>
             <input type="text" th:field="*{postalCode}" class="form-control" th:value="*{postalCode}"
                    th:disabled="${readOnly}"/>
+
+            <span class="help-block" th:each="err : ${#fields.errors('postalCode')}" th:text="${err}"></span>
         </div>
 
         <div class="col-md-6 form-group">
@@ -105,14 +118,4 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        $('#addressForm').livequery('.phone-number-tmpl', function (element) {
-            $(element).find('input[name="phoneNumber[]"]').mask('+00(000) 000-00-00', {
-                placeholder: '+__(___) ___-__-__',
-                clearIfNotMatch: true
-            });
-        });
-    });
-</script>
-
+<script type="text/javascript" th:src="@{/js/addressForm.js}"></script>
