@@ -1,4 +1,5 @@
-#Address book web application
+
+<b>Address book web application</b>
 
 This web application supports managing of address entries.
 User is able to create/view/update/delete addresses which are stored in H2 in-memory database (DB configuration is replaceable).
